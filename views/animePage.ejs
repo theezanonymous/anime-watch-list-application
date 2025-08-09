@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <%- include("header") %>
+    <div class="animePage">
+        <div class="animePageLeft">
+            <img class = "animePageImage" src=<%= row.image_url %> alt="Image">
+            <h3 class = "leftInformation" >Information</h3>
+            <div>Type: <%= row.type %></div>
+            <div>Episodes: <%= row.episodes %></div>
+            <div>Status: <%= row.status %></div>
+            <div>Rating: <%= row.rating %></div>
+        </div> 
+        <div class="animePageRight">
+            <h1 class = "border-flow rightTitle"><%= row.title %></h1>
+            <div class="stats">
+                <span class = "statName">Score</span>
+                <span class = "statName">Popularity</span>
+                <span class = "statNum"><%= row.score %></span>
+                <span class = "statNum">#<%= row.popularity %></span>
+            </div>
+            <div class="synopsisContainer">
+                <h2>Synopsis</h2>
+                <div class = "synopsisText"><%= row.synopsis %></div>
+            </div>
+            <form class = "updateForm" action = "" method = "POST">
+                <div>
+                    <label for="watching">Mark As Watching</label>
+                    <input type="checkbox" name = "watching" id = "watching" value = "yes" <%= existingInfo?"checked":undefined  %> >
+                </div>
+                <div>
+                    <label for="episodeswatched">Episodes Watched</label>
+                    <input id = "episodeswatched" type="number" min = "0" max = "<%= row.episodes %>" value="<%= existingInfo?existingInfo:0 %>" name = "episodeswatched"><span>/ <%= row.episodes %> </span>
+                </div>
+                <button class = "updateButton" type = "submit">Update</button>
+            </form>
+        </div>
+    </div>
+    <%- include("footer") %>
+</body>
+</html>
