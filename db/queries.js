@@ -35,7 +35,6 @@ async function getAnimeObject(link, name = false){
             score: anime.score,
             popularity: anime.popularity, 
             synopsis: anime.synopsis,
-            genres:anime.genres.map((genre)=>genre.name)
         }
 }
 
@@ -80,10 +79,9 @@ async function insertAnime(id, episodesWatched){
           // Handle any errors that occurred during the fetch or parsing
           console.error('There was a problem with the fetch operation:', error);
         });
-        let genres = anime.genres.map((genre)=>genre.name)
         
-        await pool.query(`INSERT INTO userList VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11, $12)`, [anime.mal_id, episodesWatched, anime.titles[0].title, anime.images.jpg.image_url, 
-        anime.type, anime.episodes, anime.status, anime.rating, anime.score, anime.popularity, anime.synopsis, genres])
+        await pool.query(`INSERT INTO userList VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)`, [anime.mal_id, episodesWatched, anime.titles[0].title, anime.images.jpg.image_url, 
+        anime.type, anime.episodes, anime.status, anime.rating, anime.score, anime.popularity, anime.synopsis])
 }
 module.exports = {
     getUserList, getAnimeByName, getAnimeById, insertAnime, deleteAnime, getExistingInfoFromId

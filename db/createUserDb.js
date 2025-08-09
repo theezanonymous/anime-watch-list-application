@@ -14,7 +14,6 @@ const SQL = `
     score FLOAT(24),
     popularity INTEGER, 
     synopsis TEXT,
-    genres TEXT[]
   );
 `
 async function main(){
